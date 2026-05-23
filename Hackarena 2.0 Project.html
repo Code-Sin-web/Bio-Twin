@@ -1,0 +1,1593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BIO-TWIN AI // Premium Patient Diagnostics & Predictive Simulation Suite</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-deep-space: #030611;
+            --bg-card: rgba(8, 16, 36, 0.85);
+            --bg-card-hover: rgba(14, 28, 60, 0.95);
+            --border-glow: rgba(0, 218, 255, 0.25);
+            --border-muted: rgba(255, 255, 255, 0.08);
+            
+            /* High-Impact Clinical Palette */
+            --electric-blue: #00D8FF;
+            --light-blue: #38BDF8;
+            --cyber-purple: #A855F7;
+            --clinical-green: #10B981;
+            --neon-red: #EF4444;
+            --warning-orange: #F97316;
+            --slate-gray: #94A3B8;
+            --text-bright: #F8FAFC;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-deep-space); }
+        ::-webkit-scrollbar-thumb { background: rgba(0, 218, 255, 0.25); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--electric-blue); }
+
+        body {
+            background-color: var(--bg-deep-space);
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(0, 218, 255, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 85% 85%, rgba(168, 85, 247, 0.06) 0%, transparent 50%),
+                repeating-linear-gradient(0deg, rgba(255,255,255,0.002) 0px, rgba(255,255,255,0.002) 1px, transparent 1px, transparent 4px);
+            color: var(--text-bright);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .scifi-font {
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1.5px;
+        }
+
+        /* TOP GLOBAL APPLICATION NAVIGATION SYSTEM BAR */
+        #global-nav-header {
+            display: none;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(4, 10, 24, 0.9);
+            border-bottom: 1px solid rgba(0, 218, 255, 0.2);
+            padding: 16px 40px;
+            backdrop-filter: blur(25px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 6px 40px rgba(0, 0, 0, 0.6);
+        }
+
+        .logo-group {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .logo-glyph {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--electric-blue), var(--cyber-purple));
+            clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+            animation: pulseGlow 4s infinite alternate;
+        }
+
+        @keyframes pulseGlow {
+            0% { transform: scale(1); filter: drop-shadow(0 0 4px var(--electric-blue)); }
+            100% { transform: scale(1.06); filter: drop-shadow(0 0 16px var(--cyber-purple)); }
+        }
+
+        .logo-text {
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: #FFF;
+        }
+        .logo-text span { color: var(--electric-blue); }
+        .logo-team-sub {
+            font-size: 0.65rem;
+            color: var(--light-blue);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-top: 2px;
+            font-weight: 700;
+        }
+
+        .nav-link-track {
+            display: flex;
+            gap: 16px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 6px;
+            border-radius: 12px;
+            border: 1px solid var(--border-muted);
+        }
+
+        .nav-btn {
+            background: transparent;
+            border: none;
+            color: var(--slate-gray);
+            padding: 12px 28px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav-btn:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .nav-btn.active {
+            background: linear-gradient(135deg, rgba(0, 218, 255, 0.25), rgba(168, 85, 247, 0.25));
+            color: #FFF;
+            border: 1px solid rgba(0, 218, 255, 0.5);
+            box-shadow: 0 0 20px rgba(0, 218, 255, 0.2);
+        }
+
+        .header-meta-user-cluster {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        /* LOGIN SECURITY ACCESS GATE PORTAL */
+        #view-login {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .gate-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-glow);
+            box-shadow: 0 0 60px rgba(0, 218, 255, 0.15);
+            padding: 56px;
+            border-radius: 24px;
+            width: 100%;
+            max-width: 480px;
+            backdrop-filter: blur(30px);
+            text-align: center;
+        }
+
+        .gate-title {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: #FFF;
+            margin: 16px 0 4px;
+        }
+        .gate-title span { color: var(--electric-blue); }
+
+        .gate-subtitle {
+            font-size: 0.8rem;
+            color: var(--light-blue);
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 40px;
+        }
+
+        .field-group {
+            text-align: left;
+            margin-bottom: 22px;
+        }
+
+        .field-group label {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--light-blue);
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            font-weight: 700;
+            letter-spacing: 1px;
+        }
+
+        .field-group input, .field-group select {
+            width: 100%;
+            background: rgba(4, 8, 20, 0.85);
+            border: 1px solid var(--border-muted);
+            padding: 16px;
+            color: #fff;
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            font-family: inherit;
+        }
+
+        .field-group select option {
+            background: #060c1c;
+            color: #fff;
+        }
+
+        .field-group input:focus, .field-group select:focus {
+            outline: none;
+            border-color: var(--electric-blue);
+            box-shadow: 0 0 18px rgba(0, 218, 255, 0.3);
+            background: rgba(4, 8, 20, 0.98);
+        }
+
+        .submit-gate-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--electric-blue), var(--cyber-purple));
+            color: #030611;
+            border: none;
+            padding: 18px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 25px rgba(0, 218, 255, 0.25);
+            margin-top: 10px;
+        }
+
+        .submit-gate-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 35px rgba(0, 218, 255, 0.5);
+        }
+
+        /* UNIVERSAL GRID AND CARD CONTAINER ARCHITECTURE */
+        .app-view-container {
+            padding: 32px;
+            max-width: 100%;
+            margin: 0 auto;
+        }
+
+        /* ADVANCED INFORMATION DENSE HOME PORTAL MESH GRID */
+        #view-main-dashboard {
+            display: none;
+            grid-template-columns: 440px 1fr 450px;
+            gap: 24px;
+            align-items: stretch;
+        }
+
+        .panel-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border-muted);
+            border-radius: 20px;
+            padding: 28px;
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+            backdrop-filter: blur(20px);
+            transition: border-color 0.3s, box-shadow 0.3s;
+            box-shadow: 0 12px 45px rgba(0, 0, 0, 0.5);
+        }
+
+        .panel-container:hover {
+            border-color: rgba(0, 218, 255, 0.2);
+            box-shadow: 0 16px 50px rgba(0, 218, 255, 0.06);
+        }
+
+        .panel-header-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--light-blue);
+            border-bottom: 1px solid var(--border-muted);
+            padding-bottom: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .panel-header-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        /* INTERACTIVE ICON-ACTION BUTTONS */
+        .action-icon-pill-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-muted);
+            color: var(--text-bright);
+            padding: 6px 14px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .action-icon-pill-btn:hover {
+            background: rgba(0, 218, 255, 0.1);
+            border-color: var(--electric-blue);
+            color: var(--electric-blue);
+        }
+
+        /* CLIENT INDENTIFICATION CORE CARD MODULE */
+        .profile-avatar-row {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: rgba(255, 255, 255, 0.02);
+            padding: 20px;
+            border-radius: 14px;
+            border: 1px solid var(--border-muted);
+        }
+
+        .big-avatar-circle {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, rgba(0, 218, 255, 0.15), rgba(168, 85, 247, 0.15));
+            border: 2px solid var(--electric-blue);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--electric-blue);
+            font-size: 1.6rem;
+            font-weight: 800;
+        }
+
+        .profile-quick-meta div:first-child {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #FFF;
+        }
+        .profile-quick-meta div:last-child {
+            font-size: 0.85rem;
+            color: var(--slate-gray);
+            margin-top: 6px;
+        }
+
+        .profile-data-readout-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            font-size: 0.95rem;
+        }
+
+        .readout-item-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            border: 1px solid var(--border-muted);
+        }
+        .readout-item-row span:first-child { color: var(--slate-gray); font-size: 0.8rem; text-transform: uppercase; font-weight: 700; }
+        .readout-item-row span:last-child { color: #FFF; font-weight: 600; text-align: right; }
+
+        /* CENTERSTAGE ARCHITECTURE FRAMEWORK (EXPANDED RING CHART) */
+        .center-dashboard-stage {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .center-split-anatomy-layout {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 24px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+            border: 1px solid var(--border-muted);
+            padding: 24px;
+            align-items: center;
+        }
+
+        .pie-chart-display-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 28px;
+            padding: 20px;
+        }
+
+        .svg-pie-wrapper {
+            position: relative;
+            width: 310px;
+            height: 310px;
+            flex-shrink: 0;
+        }
+
+        .pie-donut-center-readout {
+            position: absolute;
+            inset: 30px;
+            background: #050b1a;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border-muted);
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.8);
+        }
+        .pie-center-value { font-size: 3.6rem; font-weight: 900; color: #FFF; }
+        .pie-center-lbl { font-size: 0.8rem; color: var(--slate-gray); text-transform: uppercase; letter-spacing: 1px; }
+
+        .pie-legend-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+            width: 100%;
+        }
+        .pie-legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.85rem;
+            background: rgba(255,255,255,0.02);
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid var(--border-muted);
+        }
+        .legend-color-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+
+        /* HOVER INTERACTIVE HUMAN MAP GRAPHIC MODULE */
+        .anatomy-hover-map-box {
+            border-left: 1px solid var(--border-muted);
+            padding-left: 24px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 14px;
+            position: relative;
+        }
+        
+        .anatomy-svg-canvas-silhouette {
+            width: 100%;
+            height: 340px;
+            opacity: 0.9;
+        }
+
+        .anatomy-interactive-target-hotspot {
+            cursor: pointer;
+            fill: rgba(0, 218, 255, 0.15);
+            stroke: var(--electric-blue);
+            stroke-width: 1.5;
+            transition: all 0.3s;
+        }
+        .anatomy-interactive-target-hotspot:hover {
+            fill: rgba(168, 85, 247, 0.4);
+            stroke: var(--cyber-purple);
+            filter: drop-shadow(0 0 8px var(--cyber-purple));
+        }
+
+        .anatomy-live-readout-hud-label {
+            background: rgba(4, 8, 20, 0.9);
+            border: 1px solid var(--border-glow);
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            text-align: center;
+            min-height: 54px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* CLINICAL AI AUTOMATED PRESCRIPTIONS BOARD */
+        .ai-automated-prescriptions-card {
+            background: linear-gradient(145deg, rgba(8, 16, 36, 0.9), rgba(13, 27, 61, 0.95));
+            border: 1px solid rgba(0, 218, 255, 0.25);
+        }
+        
+        .ai-prescriptions-scrolling-content {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .prescription-bullet-entry-box {
+            background: rgba(0,0,0,0.3);
+            border: 1px solid var(--border-muted);
+            padding: 16px;
+            border-radius: 12px;
+            display: flex;
+            gap: 16px;
+            align-items: flex-start;
+        }
+        .prescription-bullet-entry-box.high-priority {
+            border-left: 4px solid var(--warning-orange);
+        }
+        .prescription-bullet-entry-box.stable-priority {
+            border-left: 4px solid var(--clinical-green);
+        }
+        .prescription-bullet-entry-box.danger-priority {
+            border-left: 4px solid var(--neon-red);
+        }
+
+        .prescription-icon-node {
+            font-size: 1.4rem;
+            background: rgba(255,255,255,0.04);
+            padding: 8px;
+            border-radius: 10px;
+        }
+        .prescription-text-desc-block div:first-child {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+        .prescription-text-desc-block div:last-child {
+            font-size: 0.85rem;
+            color: var(--slate-gray);
+            line-height: 1.4;
+        }
+
+        /* HISTORIC PATHOLOGY COMPREHENSIVE RECORD TRACKER */
+        .pathology-record-table-wrapper {
+            overflow-x: auto;
+        }
+        .pathology-grid-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            text-align: left;
+        }
+        .pathology-grid-table th {
+            color: var(--slate-gray);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.75rem;
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border-muted);
+            letter-spacing: 0.5px;
+        }
+        .pathology-grid-table td {
+            padding: 16px;
+            border-bottom: 1px solid var(--border-muted);
+            color: #E2E8F0;
+        }
+        .pathology-badge {
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.72rem;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        /* QUANTITATIVE LABORATORY REPORT PILLS */
+        .lab-metrics-grid-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .lab-metric-card-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(4, 8, 20, 0.5);
+            border: 1px solid var(--border-muted);
+            padding: 14px 18px;
+            border-radius: 14px;
+            border-left: 5px solid var(--clinical-green);
+        }
+        .lab-metric-card-item.status-warning { border-left-color: var(--warning-orange); }
+        .lab-metric-card-item.status-danger { border-left-color: var(--neon-red); }
+
+        .metric-label-group .title { font-size: 0.9rem; font-weight: 700; color: #FFF; }
+        .metric-label-group .desc { font-size: 0.78rem; color: var(--slate-gray); margin-top: 2px; }
+
+        .metric-value-group { text-align: right; }
+        .metric-value-group .num { font-size: 1.2rem; font-weight: 800; color: #FFF; }
+        .metric-value-group .num span { font-size: 0.8rem; color: var(--slate-gray); font-weight: 500; margin-left: 2px; }
+
+        /* PREDICTIVE HARDWARE HUD SIMULATOR TARGET PAGE */
+        #view-whatif-simulator {
+            display: none;
+            grid-template-columns: 480px 1fr;
+            gap: 28px;
+            align-items: stretch;
+        }
+
+        .simulator-range-card-box {
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid var(--border-muted);
+            padding: 18px;
+            border-radius: 14px;
+            margin-bottom: 2px;
+        }
+        .range-data-label-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.95rem;
+            color: #E2E8F0;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+        .range-data-label-row font { color: var(--electric-blue); font-weight: 700; }
+        
+        .native-range-slider {
+            width: 100%;
+            accent-color: var(--electric-blue);
+            cursor: pointer;
+            height: 8px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 4px;
+        }
+
+        .anatomy-viewport-stage-panel {
+            background: #01040a;
+            border: 1px solid rgba(0, 218, 255, 0.25);
+            border-radius: 24px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            min-height: 800px;
+            box-shadow: inset 0 0 50px rgba(0,0,0,0.9);
+        }
+
+        .canvas-container-box {
+            flex-grow: 1;
+            position: relative;
+        }
+        
+        #anatomyWireframeCanvas {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .ai-engine-projection-hud-overlay {
+            position: absolute;
+            bottom: 24px;
+            left: 24px;
+            right: 24px;
+            background: rgba(6, 12, 28, 0.96);
+            border: 1px solid rgba(0, 218, 255, 0.35);
+            padding: 24px;
+            border-radius: 16px;
+            backdrop-filter: blur(20px);
+            display: grid;
+            grid-template-columns: 1fr 340px;
+            gap: 28px;
+            align-items: center;
+        }
+        .ai-insight-text-paragraph { font-size: 1rem; line-height: 1.6; color: #E2E8F0; }
+        
+        .ai-stat-row-badges { display: flex; flex-direction: column; gap: 12px; font-size: 0.95rem; }
+        .projection-delta-row { display: flex; justify-content: space-between; color: var(--slate-gray); border-bottom: 1px solid var(--border-muted); padding-bottom: 8px; }
+        .projection-delta-row:last-child { border-bottom: none; padding-bottom: 0; }
+
+        /* SMOOTH ANIMATED SYSTEM NOTIFICATION ALERT OVERLAY */
+        #smooth-biometric-alert-toast {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: #0d0408;
+            border: 2px solid var(--neon-red);
+            border-radius: 16px;
+            width: 420px;
+            box-shadow: 0 10px 40px rgba(239, 68, 68, 0.3);
+            padding: 24px;
+            z-index: 3000;
+            display: flex;
+            gap: 16px;
+            align-items: start;
+            transform: translateX(500px);
+            opacity: 0;
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.4s ease;
+        }
+
+        #smooth-biometric-alert-toast.show {
+            transform: translateX(0);
+            opacity: 1;
+        }
+
+        .toast-icon-node {
+            font-size: 1.8rem;
+            color: var(--neon-red);
+            animation: pulseGlowRed 1.2s infinite alternate;
+        }
+
+        .toast-body-block h4 {
+            font-size: 1.05rem;
+            color: #fff;
+            margin-bottom: 6px;
+            text-transform: uppercase;
+        }
+        .toast-body-block p {
+            font-size: 0.88rem;
+            line-height: 1.4;
+            color: #E2E8F0;
+        }
+
+        /* CONFIGURATOR DATA MANAGEMENT POPUP MODAL LAYER */
+        #profile-edit-modal-layer {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(2, 4, 10, 0.92);
+            backdrop-filter: blur(15px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 24px;
+        }
+
+        .modal-form-window {
+            background: #060c1c;
+            border: 1px solid var(--border-glow);
+            border-radius: 24px;
+            width: 100%;
+            max-width: 750px;
+            display: flex;
+            flex-direction: column;
+            max-height: 90vh;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.7);
+        }
+
+        .modal-header {
+            padding: 24px 32px;
+            border-bottom: 1px solid var(--border-muted);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .modal-header h3 { font-size: 1.2rem; color: #FFF; text-transform: uppercase; }
+        .close-modal-btn { background: transparent; border: none; color: var(--slate-gray); font-size: 1.6rem; cursor: pointer; }
+
+        .modal-scroll-body {
+            padding: 32px;
+            overflow-y: auto;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+        }
+        .modal-scroll-body .field-group.full-width { grid-column: span 2; }
+
+        .modal-footer {
+            padding: 24px 32px;
+            border-top: 1px solid var(--border-muted);
+            display: flex;
+            justify-content: flex-end;
+            gap: 16px;
+        }
+        .cancel-btn { background: transparent; border: 1px solid var(--border-muted); color: var(--slate-gray); padding: 14px 28px; border-radius: 10px; cursor: pointer; font-size: 0.9rem; font-weight: 600; }
+        .save-btn { background: var(--electric-blue); color: #030611; font-weight: 800; border: none; padding: 14px 32px; border-radius: 10px; cursor: pointer; font-size: 0.9rem; }
+
+        /* TARGET DEVICE MEDIA CODES RESPONSIBILITY */
+        @media (max-width: 1600px) {
+            #view-main-dashboard { grid-template-columns: 400px 1fr; }
+            .center-split-anatomy-layout { grid-template-columns: 1fr; }
+            .anatomy-hover-map-box { border-left: none; border-top: 1px solid var(--border-muted); padding-left: 0; padding-top: 24px; }
+        }
+        @media (max-width: 1200px) {
+            #view-main-dashboard { grid-template-columns: 1fr; }
+            #view-whatif-simulator { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header id="global-nav-header">
+        <div class="logo-group">
+            <div class="logo-glyph"></div>
+            <div>
+                <div class="logo-text scifi-font">BIO-TWIN <span>AI</span></div>
+                <div class="logo-team-sub">POWERED BY TRAE AI</div>
+            </div>
+        </div>
+        
+        <div class="nav-link-track scifi-font">
+            <button class="nav-btn active" id="btn-tab-dashboard" onclick="switchAppViewScreen('dashboard')">Diagnostic Engine</button>
+            <button class="nav-btn" id="btn-tab-simulator" onclick="switchAppViewScreen('simulator')">What If Slide</button>
+        </div>
+        
+        <div class="header-meta-user-cluster">
+            <div style="text-align: right; font-size: 0.8rem;">
+                <span style="font-weight: 800; color: #FFF; display:block;" id="header-user-name">Sinchan Patra</span>
+            </div>
+        </div>
+    </header>
+
+    <main class="app-view-container">
+
+        <section id="view-login">
+            <div class="gate-card">
+                <div class="logo-glyph" style="margin: 0 auto 24px; width: 50px; height: 50px;"></div>
+                <div class="gate-title scifi-font">BIO-TWIN <span>AI</span></div>
+                <div class="gate-subtitle">Powered by TRAE AI</div>
+                
+                <form onsubmit="handlePortalAuthentication(event)">
+                    <div class="field-group">
+                        <label class="scifi-font">Patient Security ID</label>
+                        <input type="text" id="login-id-input" value="PT-2026-9401" required autocomplete="off">
+                    </div>
+                    <div class="field-group">
+                        <label class="scifi-font">Patient Full Name</label>
+                        <input type="text" id="login-username-input" value="Sinchan Patra" required autocomplete="off">
+                    </div>
+                    <div class="field-group">
+                        <label class="scifi-font">Assigned Profile Gender</label>
+                        <select id="login-gender-input">
+                            <option value="Male">Male </option>
+                            <option value="Female">Female </option>
+                            <option value="Female">Other </option>
+                        </select>
+                    </div>
+                    <button type="submit" class="submit-gate-btn scifi-font">SUBMIT</button>
+                </form>
+            </div>
+        </section>
+
+        <section id="view-main-dashboard">
+            
+            <div style="display:flex; flex-direction:column; gap:24px;">
+                <div class="panel-container">
+                    <div class="panel-header-title scifi-font">
+                        <span>Patient Demographics</span>
+                        <span style="font-size:0.7rem; color:var(--clinical-green); letter-spacing:0;">● SECURE</span>
+                    </div>
+                    
+                    <div class="profile-avatar-row">
+                        <div class="big-avatar-circle scifi-font" id="profile-initials-badge">SP</div>
+                        <div class="profile-quick-meta">
+                            <div id="lbl-display-name">Sinchan Patra</div>
+                            <div id="lbl-display-id" style="font-size:0.8rem; color:var(--electric-blue); font-family:'Orbitron',sans-serif; margin-top:2px;">ID: PT-2026-9401</div>
+                        </div>
+                    </div>
+                    
+                    <div class="profile-data-readout-list" style="font-size: 1rem;">
+                        <div class="readout-item-row"><span>Age </span><span id="lbl-display-age">21 Yrs</span></div>
+                        <div class="readout-item-row"><span>Height</span><span id="lbl-display-height">178 cm</span></div>
+                        <div class="readout-item-row"><span>Weight</span><span id="lbl-display-weight">74 kg</span></div>
+                        <div class="readout-item-row"><span>Exception Syndromes / Diseases</span><span id="lbl-display-exceptions" style="color:var(--warning-orange);">Hyperglycemic Trait Baseline</span></div>
+                        <div class="readout-item-row"><span>Address</span><span id="lbl-display-address">Barasat, WB, India, kol-700124</span></div>
+                    </div>
+
+                    <div style="display:grid; grid-template-columns: 1fr 1fr; gap:12px;">
+                        <button class="action-icon-pill-btn" style="justify-content:center; padding:12px;" onclick="openProfileModifierModalWindow()">⚙️ Modify Profile</button>
+                        <button class="action-icon-pill-btn" style="justify-content:center; padding:12px; color:var(--electric-blue); border-color:rgba(0,218,255,0.3);" onclick="triggerPdfReportDownloadSimulation()">📥 Download Past Report</button>
+                    </div>
+                </div>
+
+                <div class="panel-container">
+                    <div class="panel-header-title scifi-font">
+                        <span>Diagnostics History Tracker</span>
+                        <button class="action-icon-pill-btn" onclick="addNewClinicalHistoryLogEntry()">➕ Log Event</button>
+                    </div>
+                    <div class="pathology-record-table-wrapper">
+                        <table class="pathology-grid-table" id="pathologyHistoryTableElement">
+                            <thead>
+                                <tr><th>Clinical Parameter Condition</th><th>Historical Status</th><th>Verification</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Myocardial Heart Attack</td><td>Negative History</td><td><span class="pathology-badge" style="background:rgba(16,185,129,0.12); color:var(--clinical-green);">Clear</span></td></tr>
+                                <tr><td>Chronic Diabetes / Glucose</td><td>Elevated Baseline Risk</td><td><span class="pathology-badge" style="background:rgba(249,115,22,0.12); color:var(--warning-orange);">Monitored</span></td></tr>
+                                <tr><td>Cerebral Stroke Incidents</td><td>Negative History</td><td><span class="pathology-badge" style="background:rgba(16,185,129,0.12); color:var(--clinical-green);">Clear</span></td></tr>
+                                <tr><td>Major Surgical Interventions</td><td>None Recorded</td><td><span class="pathology-badge" style="background:rgba(16,185,129,0.12); color:var(--clinical-green);">Clear</span></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="center-dashboard-stage">
+                
+                <div class="center-split-anatomy-layout">
+                    <div class="pie-chart-display-container">
+                        <div class="svg-pie-wrapper">
+                            <svg width="100%" height="100%" viewBox="0 0 42 42">
+                                <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="rgba(255,255,255,0.03)" stroke-width="4.5"></circle>
+                                <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="var(--electric-blue)" stroke-width="4.5" stroke-dasharray="45 55" stroke-dashoffset="100"></circle>
+                                <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="var(--cyber-purple)" stroke-width="4.5" stroke-dasharray="35 65" stroke-dashoffset="55"></circle>
+                                <circle cx="21" cy="21" r="15.915" fill="transparent" stroke="var(--clinical-green)" stroke-width="4.5" stroke-dasharray="20 80" stroke-dashoffset="20"></circle>
+                            </svg>
+                            <div class="pie-donut-center-readout">
+                                <span class="pie-center-value scifi-font" id="lbl-main-health-score">76%</span>
+                                <span class="pie-center-lbl">HEALTH INTEGRITY</span>
+                            </div>
+                        </div>
+                        <div class="pie-legend-grid">
+                            <div class="pie-legend-item"><div class="legend-color-dot" style="background:var(--electric-blue)"></div><div>Cellular Shield (45%)</div></div>
+                            <div class="pie-legend-item"><div class="legend-color-dot" style="background:var(--cyber-purple)"></div><div>Metabolic Array (35%)</div></div>
+                            <div class="pie-legend-item"><div class="legend-color-dot" style="background:var(--clinical-green)"></div><div>Vascular Load (20%)</div></div>
+                        </div>
+                    </div>
+
+                    <div class="anatomy-hover-map-box">
+                        <div style="text-align:center;" class="scifi-font">
+                            <span style="font-size:0.8rem; color:var(--text-bright); font-weight:700; display:block; margin-bottom:4px;">INTERACTIVE ORGAN MAP</span>
+                            <span style="font-size:0.65rem; color:var(--electric-blue);">HOVER MOUSE OVER VECTOR</span>
+                        </div>
+                        
+                        <svg class="anatomy-svg-canvas-silhouette" viewBox="0 0 100 220">
+                            <circle class="anatomy-interactive-target-hotspot" cx="50" cy="24" r="14" onmouseover="updateOrganHudTextReadout('Brain System Axis', 'Neural latency index stable. No ischemic stroke biomarkers detected.')"/>
+                            
+                            <line x1="50" y1="38" x2="50" y2="46" stroke="rgba(0, 218, 255, 0.4)" stroke-width="3"/>
+                            
+                            <rect x="34" y="46" width="32" height="64" rx="6" fill="rgba(255,255,255,0.01)" stroke="rgba(255,255,255,0.1)" stroke-width="1.5"/>
+                            
+                            <circle class="anatomy-interactive-target-hotspot" cx="46" cy="68" r="7" onmouseover="updateOrganHudTextReadout('Coronary Engine (Heart)', 'Sync cycles matching nominal sinus ryhthms. Arrhythmia risks negative.')"/>
+                            
+                            <ellipse class="anatomy-interactive-target-hotspot" cx="39" cy="66" rx="4" ry="11" onmouseover="updateOrganHudTextReadout('Left Pulmonary Node', 'Gas transformation quotient optimal. Airway structural resistance clean.')"/>
+                            <ellipse class="anatomy-interactive-target-hotspot" cx="61" cy="66" rx="4" ry="11" onmouseover="updateOrganHudTextReadout('Right Pulmonary Node', 'Symmetrical fluid integration verified across right alveolar zones.')"/>
+                            
+                            <polygon class="anatomy-interactive-target-hotspot" points="37,88 63,88 58,102 42,102" onmouseover="updateOrganHudTextReadout('Hepatic Node (Liver)', 'Enzymatic payload (ALT/AST) normal. Structural lipid loading balanced.')"/>
+                            
+                            <line x1="34" y1="50" x2="20" y2="105" stroke="var(--electric-blue)" stroke-width="3" stroke-linecap="round"/>
+                            <line x1="66" y1="50" x2="80" y2="105" stroke="var(--electric-blue)" stroke-width="3" stroke-linecap="round"/>
+                            
+                            <line x1="40" y1="110" x2="38" y2="205" stroke="var(--electric-blue)" stroke-width="3.5" stroke-linecap="round"/>
+                            <line x1="60" y1="110" x2="62" y2="205" stroke="var(--electric-blue)" stroke-width="3.5" stroke-linecap="round"/>
+                        </svg>
+
+                        <div class="anatomy-live-readout-hud-label" id="lblOrganTelemetryInteractiveHudText">
+                            Hover mouse cursor over basic human nodes to initialize diagnostics vector stream.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel-container ai-automated-prescriptions-card">
+                    <div class="panel-header-title scifi-font" style="color: var(--electric-blue);">
+                        <span>AI Automated Actions & Medical Recommendations</span>
+                        <span style="font-size:0.65rem; color:var(--cyber-purple); animation: pulseGlow 1s infinite alternate;">● PROCESSING COMPREHENSIVE PATHOLOGY DATA</span>
+                    </div>
+                    <div class="ai-prescriptions-scrolling-content" id="ai-prescriptions-main-stack">
+                        <div class="prescription-bullet-entry-box high-priority">
+                            <div class="prescription-icon-node">🍪</div>
+                            <div class="prescription-text-desc-block">
+                                <div>Restrict Glucose Ingestion Parameters</div>
+                                <div>Current base reads 118 mg/dL [Elevated]. Restricting high-glycemic carbohydrates will structurally normalize pancreas stress indices and lower your HbA1c matrix from pre-diabetic risk markers.</div>
+                            </div>
+                        </div>
+                        <div class="prescription-bullet-entry-box stable-priority">
+                            <div class="prescription-icon-node">🧠</div>
+                            <div class="prescription-text-desc-block">
+                                <div>Maintain Cardiovascular Arrhythmia Defense Shield</div>
+                                <div>Serum potassium and sodium density tracks are nominal. Guard coronary synchronization grids by sustaining uniform nutritional profiles and stable mineral levels.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="panel-container">
+                <div class="panel-header-title scifi-font">
+                    <span>Recent Lab Reports</span>
+                    <button class="action-icon-pill-btn" onclick="triggerRegenerateLabDataAction()">🔄 Re-Analyze</button>
+                </div>
+                
+                <div class="lab-metrics-grid-stack" id="dashboard-lab-report-list-element">
+                    </div>
+            </div>
+
+        </section>
+
+        <section id="view-whatif-simulator">
+            
+            <div style="display: flex; flex-direction: column; gap: 24px;">
+                <div class="panel-container">
+                    <div class="panel-header-title scifi-font" style="color:var(--cyber-purple); font-size:1.15rem;">
+                        <span>Predictive Twin Modifiers</span>
+                        <button class="action-icon-pill-btn" onclick="resetAllSimulationSlidersToBaseline()">🔄 Reset </button>
+                    </div>
+                    
+                    <div style="display:flex; flex-direction:column; gap:12px;">
+                        
+                        <div class="simulator-range-card-box">
+                            <div class="range-data-label-row">
+                                <span>🫁 Oxygen Saturation Ratio</span>
+                                <font id="sim-lbl-oxygen">98%</font>
+                            </div>
+                            <input type="range" class="native-range-slider" min="82" max="112" value="98" id="sliderParamOxygen" oninput="runBiomedicalSimulationRecalculation()">
+                        </div>
+
+                        <div class="simulator-range-card-box">
+                            <div class="range-data-label-row">
+                                <span>🍪 Glucose Blood Sugar Level</span>
+                                <font id="sim-lbl-glucose">118 mg/dL</font>
+                            </div>
+                            <input type="range" class="native-range-slider" min="40" max="290" value="118" id="sliderParamGlucose" oninput="runBiomedicalSimulationRecalculation()">
+                        </div>
+
+                        <div class="simulator-range-card-box">
+                            <div class="range-data-label-row">
+                                <span>🔴 Red Blood Cell Count (RBC)</span>
+                                <font id="sim-lbl-rbc">5.2 M/µL</font>
+                            </div>
+                            <input type="range" class="native-range-slider" min="2.0" max="8.5" step="0.1" value="5.2" id="sliderParamRbc" oninput="runBiomedicalSimulationRecalculation()">
+                        </div>
+
+                        <div class="simulator-range-card-box">
+                            <div class="range-data-label-row">
+                                <span>⚪ White Blood Cell Count (WBC)</span>
+                                <font id="sim-lbl-wbc">6.8 K/µL</font>
+                            </div>
+                            <input type="range" class="native-range-slider" min="1.5" max="22.0" step="0.1" value="6.8" id="sliderParamWbc" oninput="runBiomedicalSimulationRecalculation()">
+                        </div>
+
+                        <div class="simulator-range-card-box">
+                            <div class="range-data-label-row">
+                                <span>🩸 Platelet Cell Density Count</span>
+                                <font id="sim-lbl-platelets">250 K/µL</font>
+                            </div>
+                            <input type="range" class="native-range-slider" min="80" max="550" value="250" id="sliderParamPlatelets" oninput="runBiomedicalSimulationRecalculation()">
+                        </div>
+
+                        <div class="simulator-range-card-box">
+                            <div class="range-data-label-row">
+                                <span>🧪 Serum Sodium Concentration</span>
+                                <font id="sim-lbl-sodium">140 mEq/L</font>
+                            </div>
+                            <input type="range" class="native-range-slider" min="120" max="160" value="140" id="sliderParamSodium" oninput="runBiomedicalSimulationRecalculation()">
+                        </div>
+
+                        <div class="simulator-range-card-box">
+                            <div class="range-data-label-row">
+                                <span>⚡ Potassium Arrhythmia Factor</span>
+                                <font id="sim-lbl-potassium">4.2 mEq/L</font>
+                            </div>
+                            <input type="range" class="native-range-slider" min="2.5" max="6.5" step="0.1" value="4.2" id="sliderParamPotassium" oninput="runBiomedicalSimulationRecalculation()">
+                        </div>
+
+                        <div class="simulator-range-card-box">
+                            <div class="range-data-label-row">
+                                <span>🧬 TSH Thyroid Metabolic Weight</span>
+                                <font id="sim-lbl-tsh">2.5 µIU/mL</font>
+                            </div>
+                            <input type="range" class="native-range-slider" min="0.1" max="12.0" step="0.1" value="2.5" id="sliderParamTsh" oninput="runBiomedicalSimulationRecalculation()">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="anatomy-viewport-stage-panel">
+                <div style="padding:28px; position:absolute; top:0; left:0; z-index:10;" class="scifi-font">
+                    <span style="font-size:1.3rem; font-weight:900; display:block; color:#FFF;" id="lblSimViewportGenderTitle">DYNAMIC 3D HUMAN SKELETON TWIN</span>
+                    <span style="font-size:0.8rem; color:var(--cyber-purple); font-weight:700;">REAL-TIME BIOMETRIC CONVERGENCE</span>
+                </div>
+
+                <div style="position: absolute; top: 28px; right: 28px; width: 180px; height: 45px; opacity: 0.6;">
+                    <svg width="100%" height="100%" viewBox="0 0 100 30">
+                        <path d="M0,15 L25,15 L30,5 L35,25 L40,10 L45,17 L50,15 L100,15" fill="none" stroke="var(--electric-blue)" stroke-width="2" stroke-dasharray="100" stroke-dashoffset="0">
+                            <animate attributeName="stroke-dashoffset" values="100;0" dur="1.5s" repeatCount="indefinite" />
+                        </path>
+                    </svg>
+                </div>
+
+                <div class="canvas-container-box">
+                    <canvas id="anatomyWireframeCanvas"></canvas>
+                </div>
+
+                <div class="ai-engine-projection-hud-overlay">
+                    <div>
+                        <div class="scifi-font" style="font-size:0.9rem; color:var(--electric-blue); font-weight:800; margin-bottom:8px;">🤖 TWIN PROJECTION REPORT INSTRUCTIONS</div>
+                        <p class="ai-insight-text-paragraph" id="simExplainerHudParagraphText" style="font-size: 1.05rem;">
+                            Adjust variable modules on the left deck. Shifting values will scale the twin's physiological structural parameters, dynamically modifying weight, target metrics, and clinical safety thresholds.
+                        </p>
+                    </div>
+                    
+                    <div class="ai-stat-row-badges" style="font-size: 1rem;">
+                        <div class="projection-delta-row"><span>Simulated Twin Age</span><span style="color:#FFF; font-weight:800;" id="sim-runtime-age-readout">21 Yrs</span></div>
+                        <div class="projection-delta-row"><span>Simulated Twin Weight</span><span style="color:#FFF; font-weight:800;" id="sim-runtime-weight-readout">74 kg</span></div>
+                        <div class="projection-delta-row"><span>System Homoeostasis</span><span style="color:var(--clinical-green); font-weight:800;" id="sim-delta-status">NOMINAL BASELINE</span></div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <div id="smooth-biometric-alert-toast">
+        <div class="toast-icon-node">⚠️</div>
+        <div class="toast-body-block">
+            <h4 id="lblToastAlertHeaderTitle">Biometric Threshold Out of Bounds</h4>
+            <p id="lblToastAlertBodyMessageText">System parameter value ranges have deviated past safety constraints.</p>
+        </div>
+    </div>
+
+    <div id="profile-edit-modal-layer">
+        <div class="modal-form-window">
+            <div class="modal-header">
+                <h3 class="scifi-font">Edit Clinical Patient Demographics</h3>
+                <button class="close-modal-btn" onclick="closeProfileModifierModalWindow()">✕</button>
+            </div>
+            <form onsubmit="handleProfileFormSubmissionChangeAction(event)">
+                <div class="modal-scroll-body">
+                    <div class="field-group">
+                        <label>Patient Security Identification Number</label>
+                        <input type="text" id="input-edit-id" required>
+                    </div>
+                    <div class="field-group">
+                        <label>Patient Full Name Mapping</label>
+                        <input type="text" id="input-edit-name" required>
+                    </div>
+                    <div class="field-group">
+                        <label>Age Vector Baseline</label>
+                        <input type="number" id="input-edit-age" required>
+                    </div>
+                    <div class="field-group">
+                        <label>Physical Height Scale (cm)</label>
+                        <input type="number" id="input-edit-height" required>
+                    </div>
+                    <div class="field-group">
+                        <label>Biological Mass Weight Scale (kg)</label>
+                        <input type="number" id="input-edit-weight" required>
+                    </div>
+                    <div class="field-group full-width">
+                        <label>Exception Syndromes / Chronic Pathology History Notes</label>
+                        <input type="text" id="input-edit-exceptions" required>
+                    </div>
+                    <div class="field-group full-width">
+                        <label>Geographic Hub Coordinates Address</label>
+                        <input type="text" id="input-edit-address" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="cancel-btn" onclick="closeProfileModifierModalWindow()">Cancel</button>
+                    <button type="submit" class="save-btn">COMMIT RE-ARCHIVE</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // MASTER STRUCTURAL DATA REPOSITORY STORED SECURELY
+        let globalPatientSystemProfileState = {
+            patientId: "PT-2026-9401",
+            fullName: "Sinchan Patra",
+            assignedGender: "Male",
+            age: 21,
+            height: 178,
+            weight: 74,
+            exceptions: "Hyperglycemic Trait Baseline",
+            address: "Barasat, WB, India"
+        };
+
+        // CLINICAL REPORT DATASTRUCTURE OBJECT PAYLOAD
+        let clinicalReportPayloadMetrics = {
+            glucose: { val: 118, unit: "mg/dL", status: "warning", text: "Elevated Sugar Threshold", segment: "CMP (Metabolic)" },
+            rbc: { val: 5.2, unit: "M/µL", status: "optimal", text: "Optimal Red Volume Density", segment: "CBC (Blood Count)" },
+            wbc: { val: 6.8, unit: "K/µL", status: "optimal", text: "Optimal Shield Count", segment: "CBC (Blood Count)" },
+            platelets: { val: 250, unit: "K/µL", status: "optimal", text: "Optimal Coagulation Layer", segment: "CBC (Blood Count)" },
+            sodium: { val: 140, unit: "mEq/L", status: "optimal", text: "Optimal Ionic Fluid Scale", segment: "CMP (Metabolic)" },
+            potassium: { val: 4.2, unit: "mEq/L", status: "optimal", text: "Optimal Myocardial Rhythm Cycle", segment: "CMP (Metabolic)" },
+            tsh: { val: 2.5, unit: "µIU/mL", status: "optimal", text: "Optimal Thyroid Balance Index", segment: "Key Add-on Test" },
+            hba1c: { val: 5.9, unit: "%", status: "warning", text: "Pre-Diabetes Borderline Range", segment: "Key Add-on Test" },
+            vitaminD: { val: 22, unit: "ng/mL", status: "danger", text: "Deficient Sluggish Immunity Risk", segment: "Key Add-on Test" }
+        };
+
+        function renderQuantitativeLabReportDashboardStack() {
+            const listContainer = document.getElementById('dashboard-lab-report-list-element');
+            listContainer.innerHTML = '';
+
+            for (const [key, item] of Object.entries(clinicalReportPayloadMetrics)) {
+                let badgeColor = "var(--clinical-green)";
+                let bgBadge = "rgba(16,185,129,0.15)";
+                let cardClass = "";
+
+                if (item.status === "warning") {
+                    badgeColor = "var(--warning-orange)";
+                    bgBadge = "rgba(249,115,22,0.15)";
+                    cardClass = "status-warning";
+                } else if (item.status === "danger") {
+                    badgeColor = "var(--neon-red)";
+                    bgBadge = "rgba(239,68,68,0.15)";
+                    cardClass = "status-danger";
+                }
+
+                const itemHtml = `
+                    <div class="lab-metric-card-item ${cardClass}">
+                        <div class="metric-label-group">
+                            <div class="title">${key.toUpperCase()} // ${item.segment}</div>
+                            <div class="desc">${item.text}</div>
+                        </div>
+                        <div class="metric-value-group">
+                            <div class="num">${item.val} <span>${item.unit}</span></div>
+                            <span class="pathology-badge" style="background:${bgBadge}; color:${badgeColor};">${item.status}</span>
+                        </div>
+                    </div>
+                `;
+                listContainer.insertAdjacentHTML('beforeend', itemHtml);
+            }
+        }
+
+        function handlePortalAuthentication(event) {
+            event.preventDefault();
+            const inputId = document.getElementById('login-id-input').value.trim();
+            const inputUser = document.getElementById('login-username-input').value.trim();
+            const inputGender = document.getElementById('login-gender-input').value;
+            
+            globalPatientSystemProfileState.patientId = inputId;
+            globalPatientSystemProfileState.fullName = inputUser; 
+            globalPatientSystemProfileState.assignedGender = inputGender;
+            
+            synchronizeProfileDOMFieldsFromStateMemory();
+            renderQuantitativeLabReportDashboardStack();
+            
+            document.getElementById('view-login').style.display = 'none';
+            document.getElementById('global-nav-header').style.display = 'flex';
+            document.getElementById('view-main-dashboard').style.display = 'grid';
+        }
+
+        function switchAppViewScreen(targetScreenViewKey) {
+            const dashboardTabBtn = document.getElementById('btn-tab-dashboard');
+            const simulatorTabBtn = document.getElementById('btn-tab-simulator');
+            const dashboardScreenLayout = document.getElementById('view-main-dashboard');
+            const simulatorScreenLayout = document.getElementById('view-whatif-simulator');
+
+            if(targetScreenViewKey === 'dashboard') {
+                dashboardTabBtn.classList.add('active');
+                simulatorTabBtn.classList.remove('active');
+                dashboardScreenLayout.style.display = 'grid';
+                simulatorScreenLayout.style.display = 'none';
+            } else {
+                simulatorTabBtn.classList.add('active');
+                dashboardTabBtn.classList.remove('active');
+                dashboardScreenLayout.style.display = 'none';
+                simulatorScreenLayout.style.display = 'flex';
+                
+                document.getElementById('lblSimViewportGenderTitle').innerText = `DYNAMIC 3D ${globalPatientSystemProfileState.assignedGender.toUpperCase()} SKELETON TWIN`;
+                
+                setTimeout(initializeAnatomyWireframeCanvasSimulationLoop, 60);
+            }
+        }
+
+        function updateOrganHudTextReadout(organTitle, telemetryReadoutText) {
+            document.getElementById('lblOrganTelemetryInteractiveHudText').innerHTML = `<strong>${organTitle}</strong>: ${telemetryReadoutText}`;
+        }
+
+        function triggerPdfReportDownloadSimulation() {
+            alert("SYS ACCESS: Extracting patient repository keys. Initializing download matrix payload for past PDF reports.");
+        }
+
+        function triggerRegenerateLabDataAction() {
+            alert("LAB NODE: Re-scanning plasma microfluidics array. Diagnostics indices successfully aligned.");
+        }
+
+        function addNewClinicalHistoryLogEntry() {
+            const userIncidentInput = prompt("Enter pathological tracking parameter condition description to log:");
+            if(!userIncidentInput) return;
+            
+            const tableBody = document.querySelector('#pathologyHistoryTableElement tbody');
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = `<td>${userIncidentInput}</td><td>Archived Log Record</td><td><span class="pathology-badge" style="background:rgba(56,189,248,0.12); color:var(--light-blue);">verified</span></td>`;
+            tableBody.insertBefore(newRow, tableBody.firstChild);
+        }
+
+        function openProfileModifierModalWindow() {
+            document.getElementById('input-edit-id').value = globalPatientSystemProfileState.patientId;
+            document.getElementById('input-edit-name').value = globalPatientSystemProfileState.fullName;
+            document.getElementById('input-edit-age').value = globalPatientSystemProfileState.age;
+            document.getElementById('input-edit-height').value = globalPatientSystemProfileState.height;
+            document.getElementById('input-edit-weight').value = globalPatientSystemProfileState.weight;
+            document.getElementById('input-edit-exceptions').value = globalPatientSystemProfileState.exceptions;
+            document.getElementById('input-edit-address').value = globalPatientSystemProfileState.address;
+            document.getElementById('profile-edit-modal-layer').style.display = 'flex';
+        }
+
+        function closeProfileModifierModalWindow() {
+            document.getElementById('profile-edit-modal-layer').style.display = 'none';
+        }
+
+        function handleProfileFormSubmissionChangeAction(event) {
+            event.preventDefault();
+            globalPatientSystemProfileState.patientId = document.getElementById('input-edit-id').value.trim();
+            globalPatientSystemProfileState.fullName = document.getElementById('input-edit-name').value.trim();
+            globalPatientSystemProfileState.age = parseInt(document.getElementById('input-edit-age').value);
+            globalPatientSystemProfileState.height = parseInt(document.getElementById('input-edit-height').value);
+            globalPatientSystemProfileState.weight = parseInt(document.getElementById('input-edit-weight').value);
+            globalPatientSystemProfileState.exceptions = document.getElementById('input-edit-exceptions').value.trim();
+            globalPatientSystemProfileState.address = document.getElementById('input-edit-address').value.trim();
+
+            synchronizeProfileDOMFieldsFromStateMemory();
+            closeProfileModifierModalWindow();
+        }
+
+        function synchronizeProfileDOMFieldsFromStateMemory() {
+            document.getElementById('header-user-name').innerText = globalPatientSystemProfileState.fullName;
+            document.getElementById('lbl-display-name').innerText = globalPatientSystemProfileState.fullName;
+            document.getElementById('lbl-display-id').innerText = `ID: ${globalPatientSystemProfileState.patientId}`;
+            document.getElementById('lbl-display-age').innerText = `${globalPatientSystemProfileState.age} Yrs (${globalPatientSystemProfileState.assignedGender})`;
+            document.getElementById('lbl-display-height').innerText = `${globalPatientSystemProfileState.height} cm`;
+            document.getElementById('lbl-display-weight').innerText = `${globalPatientSystemProfileState.weight} kg`;
+            document.getElementById('lbl-display-exceptions').innerText = globalPatientSystemProfileState.exceptions;
+            document.getElementById('lbl-display-address').innerText = globalPatientSystemProfileState.address;
+
+            if(globalPatientSystemProfileState.fullName.length > 1) {
+                const parts = globalPatientSystemProfileState.fullName.split(' ');
+                const initials = parts.length > 1 ? (parts[0][0] + parts[1][0]) : parts[0][0];
+                document.getElementById('profile-initials-badge').innerText = initials.toUpperCase();
+            }
+        }
+
+        function resetAllSimulationSlidersToBaseline() {
+            document.getElementById('sliderParamOxygen').value = 98;
+            document.getElementById('sliderParamGlucose').value = 118;
+            document.getElementById('sliderParamRbc').value = 5.2;
+            document.getElementById('sliderParamWbc').value = 6.8;
+            document.getElementById('sliderParamPlatelets').value = 250;
+            document.getElementById('sliderParamSodium').value = 140;
+            document.getElementById('sliderParamPotassium').value = 4.2;
+            document.getElementById('sliderParamTsh').value = 2.5;
+            runBiomedicalSimulationRecalculation();
+        }
+
+        /* ================== SMOOTH NOTIFICATION INTERCEPT POPUP SYSTEM ================== */
+        let toastTimeoutPointer = null;
+        function triggerSmoothPopupWarningToast(headerTitleText, bodyMessageText) {
+            const toastElement = document.getElementById('smooth-biometric-alert-toast');
+            document.getElementById('lblToastAlertHeaderTitle').innerText = headerTitleText;
+            document.getElementById('lblToastAlertBodyMessageText').innerText = bodyMessageText;
+            
+            toastElement.classList.add('show');
+            
+            clearTimeout(toastTimeoutPointer);
+            toastTimeoutPointer = setTimeout(() => {
+                toastElement.classList.remove('show');
+            }, 6500);
+        }
+
+        let simulationRenderingChassisColor = '#00D8FF';
+        let customStructuralDeformationFactor = 1.0;
+
+        function runBiomedicalSimulationRecalculation() {
+            const oxVal = parseInt(document.getElementById('sliderParamOxygen').value);
+            const gluVal = parseInt(document.getElementById('sliderParamGlucose').value);
+            const rbcVal = parseFloat(document.getElementById('sliderParamRbc').value);
+            const wbcVal = parseFloat(document.getElementById('sliderParamWbc').value);
+            const platVal = parseInt(document.getElementById('sliderParamPlatelets').value);
+            const sodVal = parseInt(document.getElementById('sliderParamSodium').value);
+            const potVal = parseFloat(document.getElementById('sliderParamPotassium').value);
+            const tshVal = parseFloat(document.getElementById('sliderParamTsh').value);
+
+            // Print values inside slider deck labels instantly
+            document.getElementById('sim-lbl-oxygen').innerText = `${oxVal}%`;
+            document.getElementById('sim-lbl-glucose').innerText = `${gluVal} mg/dL`;
+            document.getElementById('sim-lbl-rbc').innerText = `${rbcVal} M/µL`;
+            document.getElementById('sim-lbl-wbc').innerText = `${wbcVal} K/µL`;
+            document.getElementById('sim-lbl-platelets').innerText = `${platVal} K/µL`;
+            document.getElementById('sim-lbl-sodium').innerText = `${sodVal} mEq/L`;
+            document.getElementById('sim-lbl-potassium').innerText = `${potVal} mEq/L`;
+            document.getElementById('sim-lbl-tsh').innerText = `${tshVal} µIU/mL`;
+
+            const explainerTextElement = document.getElementById('simExplainerHudParagraphText');
+            const statusBadgeElement = document.getElementById('sim-delta-status');
+            
+            // PREDICTIVE TWIN IMPACT LOGIC - MODIFIES AGE AND WEIGHT DYNAMICALLY
+            let calculatedSimAgeOffset = 0;
+            let calculatedSimWeightOffset = 0;
+
+            // Biological age/weight skew parameters derived from health states
+            if (gluVal > 140) { calculatedSimAgeOffset += Math.floor((gluVal - 140) / 25); calculatedSimWeightOffset += Math.floor((gluVal - 140) / 10); }
+            if (tshVal > 5.0) { calculatedSimAgeOffset += 1; calculatedSimWeightOffset += Math.floor((tshVal - 5) * 2); } // Hypothyroidism -> Weight Gain
+            if (tshVal < 0.4) { calculatedSimAgeOffset += 2; calculatedSimWeightOffset -= Math.floor((0.4 - tshVal) * 6); } // Hyperthyroidism -> Weight Loss
+            if (oxVal < 90) { calculatedSimAgeOffset += Math.floor((90 - oxVal) / 2); }
+            if (rbcVal < 3.8) { calculatedSimAgeOffset += 2; }
+
+            const finalSimulatedAge = globalPatientSystemProfileState.age + calculatedSimAgeOffset;
+            const finalSimulatedWeight = Math.max(40, globalPatientSystemProfileState.weight + calculatedSimWeightOffset);
+
+            document.getElementById('sim-runtime-age-readout').innerText = `${finalSimulatedAge} Yrs`;
+            document.getElementById('sim-runtime-weight-readout').innerText = `${finalSimulatedWeight} kg`;
+
+            // THRESHOLD DRIFT INTERCEPTS TRACKING SECURELY (POPUP WARNING CHECKS)
+            // 1. Oxygen Saturation
+            if (oxVal > 110) {
+                triggerSmoothPopupWarningToast("Hyperoxia Multi-Organ Saturation [HIGH]", "Excessive oxygen partial pressure builds pulmonary oxidative damage vectors, risking free radical cell stress inside brain structures.");
+                document.getElementById('sliderParamOxygen').value = 100; return;
+            } else if (oxVal < 88) {
+                triggerSmoothPopupWarningToast("Hypoxia Respiration Deficit [LOW]", "Oxygen levels dropped below safe cellular respiration lines. Triggers severe anemia tracking, exhaustion, dizziness, and peripheral cold states.");
+                document.getElementById('sliderParamOxygen').value = 92; return;
+            }
+
+            // 2. Glucose
+            if (gluVal > 240) {
+                triggerSmoothPopupWarningToast("Hyperglycemia Glycemic Crisis [HIGH]", "Severe sugar payload spikes blood plasma density, leading to frequent urination, chronic dehydration pathways, and acute diabetic complications.");
+                document.getElementById('sliderParamGlucose').value = 150; return;
+            } else if (gluVal < 55) {
+                triggerSmoothPopupWarningToast("Hypoglycemia Metabolic Crash [LOW]", "Sugar reserves dropped below neurological operating levels. Induces acute sweating, muscle tremors, severe mental confusion, or sudden fainting.");
+                document.getElementById('sliderParamGlucose').value = 80; return;
+            }
+
+            // 3. RBC
+            if (rbcVal > 7.8) {
+                triggerSmoothPopupWarningToast("Polycythemia Plasma Viscosity [HIGH]", "Red blood cell over-saturation forces blood thickening. Elevates microvascular friction, lung stress loops, and increases coronary muscle workloads.");
+                document.getElementById('sliderParamRbc').value = 5.8; return;
+            } else if (rbcVal < 3.2) {
+                triggerSmoothPopupWarningToast("Severe Anemia Mass Deficit [LOW]", "Insufficient red cells restrict global oxygen transport. Leads to tissue fatigue, chronic muscle exhaustion, pale complexion traits, and breathing strain.");
+                document.getElementById('sliderParamRbc').value = 4.2; return;
+            }
+
+            // 4. WBC
+            if (wbcVal > 18.0) {
+                triggerSmoothPopupWarningToast("Leukocytosis Inflammatory Surge [HIGH]", "White blood shield spikes signify acute systemic pathogen defense response, active tissue inflammation, or severe biological stress vectors.");
+                document.getElementById('sliderParamWbc').value = 11.0; return;
+            } else if (wbcVal < 2.5) {
+                triggerSmoothPopupWarningToast("Leukopenia Immune Compromise [LOW]", "White blood counts dropped critical margins. Disarms protective defense nets, leaving the patient completely exposed to opportunistic infection cycles.");
+                document.getElementById('sliderParamWbc').value = 4.5; return;
+            }
+
+            // 5. Platelets
+            if (platVal > 480) {
+                triggerSmoothPopupWarningToast("Thrombocytosis Blockage Hazard [HIGH]", "Platelet over-congestion increases risks of internal vascular clotting, stroke events, deep vein thrombosis, and arterial line blocks.");
+                document.getElementById('sliderParamPlatelets').value = 300; return;
+            } else if (platVal < 110) {
+                triggerSmoothPopupWarningToast("Thrombocytopenia Hemorrhage Risk [LOW]", "Coagulation agents dropped too low. Triggers easy body bruising, broken capillaries, and prolonged bleeding hazards from tiny dermal cuts.");
+                document.getElementById('sliderParamPlatelets').value = 180; return;
+            }
+
+            // 6. Sodium
+            if (sodVal > 155) {
+                triggerSmoothPopupWarningToast("Hypernatremia Cellular Dehydration [HIGH]", "Elevated sodium concentrations strip cellular fluid fields. Induces intense systemic thirst, rapid cognitive confusion, and sudden muscle twitching.");
+                document.getElementById('sliderParamSodium').value = 142; return;
+            } else if (sodVal < 125) {
+                triggerSmoothPopupWarningToast("Hyponatremia Fluid Retention [LOW]", "Low serum sodium reveals excessive fluid accumulation. Triggers neurological swelling, headaches, severe lethargy, and general exhaustion.");
+                document.getElementById('sliderParamSodium').value = 135; return;
+            }
+
+            // 7. Potassium
+            if (potVal > 5.8) {
+                triggerSmoothPopupWarningToast("Hyperkalemia Arrhythmia Emergency [HIGH]", "Potassium surge breaks cardiac electrical polarization safety. Poses an immediate danger of heart palpitations and lethal ventricular arrhythmias.");
+                document.getElementById('sliderParamPotassium').value = 4.8; return;
+            } else if (potVal < 3.0) {
+                triggerSmoothPopupWarningToast("Hypokalemia Neuromuscular Depletion [LOW]", "Inadequate potassium destabilizes muscle potentials, leading to sudden painful cramps, profound somatic weakness, and irregular heart rhythms.");
+                document.getElementById('sliderParamPotassium').value = 3.8; return;
+            }
+
+            // 8. TSH Inverse Mechanics
+            if (tshVal > 9.5) {
+                triggerSmoothPopupWarningToast("Hypothyroidism Metabolic Drop [HIGH TSH]", "Elevated TSH signals an underactive thyroid engine. Metabolic processes collapse, causing chronic sluggish weight gain, fatigue, and depression loops.");
+                document.getElementById('sliderParamTsh').value = 4.0; return;
+            } else if (tshVal < 0.2) {
+                triggerSmoothPopupWarningToast("Hyperthyroidism Raced Metabolism [LOW TSH]", "Suppressed TSH values track an overactive thyroid crisis. Drives a raced metabolism, causing anxiety, rapid heart rates, and unexplained weight loss.");
+                document.getElementById('sliderParamTsh').value = 1.5; return;
+            }
+
+            // VISUAL CHASSIS RENDERING ADJUSTMENTS ACCORDING TO DATA THRESHOLDS
+            if (gluVal > 140 || potVal > 5.0 || sodVal > 148) {
+                simulationRenderingChassisColor = '#EF4444'; // Critical Red Frame
+                customStructuralDeformationFactor = 1.15;
+                statusBadgeElement.innerText = "PATHOLOGICAL ACCELERATION MARGIN";
+                statusBadgeElement.style.color = "var(--neon-red)";
+                explainerTextElement.innerText = "⚠️ High metabolic/ionic variables stress cardiovascular polarization profiles. Notice the predictive twin model's age shifts up, compounding visceral loading risks.";
+            } else if (oxVal < 92 || rbcVal < 4.0 || tshVal > 5.5) {
+                simulationRenderingChassisColor = '#F97316'; // Borderline Warning Orange
+                customStructuralDeformationFactor = 0.9;
+                statusBadgeElement.innerText = "ISCHEMIC ENERGY RESISTANCE LOOP";
+                statusBadgeElement.style.color = "var(--warning-orange)";
+                explainerTextElement.innerText = "📉 Sub-optimal oxygen carrying matrices or falling thyroid levels downscale cellular respiration cycles. Twin vitality outputs show accelerated fatigue profiles.";
+            } else {
+                simulationRenderingChassisColor = '#10B981'; // Healthy Clinical Green
+                customStructuralDeformationFactor = 1.0;
+                statusBadgeElement.innerText = "HOMEOSTATIC EQUILIBRIUM NOMINAL";
+                statusBadgeElement.style.color = "var(--clinical-green)";
+                explainerTextElement.innerText = "✨ Balanced quantitative parameters optimize cellular shielding and metabolic performance. Organ structural degradation tracks are safely minimized.";
+            }
+        }
+
+        /* ================== GENDER-ADAPTIVE 3D WIREFRAME SIMULATOR GRID ENGINE ================== */
+        function initializeAnatomyWireframeCanvasSimulationLoop() {
+            const canvas = document.getElementById('anatomyWireframeCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+
+            function resizeCanvasToViewportBounds() {
+                canvas.width = canvas.parentElement.clientWidth;
+                canvas.height = canvas.parentElement.clientHeight;
+            }
+            resizeCanvasToViewportBounds();
+
+            let rotationalTicksTimelineIndex = 0;
+
+            const maleChassisBoneSegmentsArray = [
+                {type: 'loop', cy: 0.14, rx: 0.05, ry: 0.06, segments: 14}, // Cranium
+                {type: 'line', x1: 0.5, y1: 0.20, x2: 0.5, y2: 0.52}, // Spine
+                {type: 'loop', cy: 0.26, rx: 0.12, ry: 0.035, segments: 12}, // Broad Shoulders
+                {type: 'loop', cy: 0.34, rx: 0.11, ry: 0.04, segments: 12}, // Thoracic Chest
+                {type: 'loop', cy: 0.42, rx: 0.09, ry: 0.03, segments: 12}, // Lower Ribs
+                {type: 'loop', cy: 0.52, rx: 0.095, ry: 0.03, segments: 10}, // Pelvis
+                {type: 'line', x1: 0.38, y1: 0.26, x2: 0.28, y2: 0.45}, // Arms Left
+                {type: 'line', x1: 0.28, y1: 0.45, x2: 0.22, y2: 0.65},
+                {type: 'line', x1: 0.62, y1: 0.26, x2: 0.72, y2: 0.45}, // Arms Right
+                {type: 'line', x1: 0.72, y1: 0.45, x2: 0.78, y2: 0.65},
+                {type: 'line', x1: 0.41, y1: 0.52, x2: 0.39, y2: 0.72}, // Left Leg
+                {type: 'line', x1: 0.39, y1: 0.72, x2: 0.37, y2: 0.94},
+                {type: 'line', x1: 0.59, y1: 0.52, x2: 0.61, y2: 0.72}, // Right Leg
+                {type: 'line', x1: 0.61, y1: 0.72, x2: 0.63, y2: 0.94}
+            ];
+
+            const femaleChassisBoneSegmentsArray = [
+                {type: 'loop', cy: 0.15, rx: 0.045, ry: 0.055, segments: 14}, // Cranium
+                {type: 'line', x1: 0.5, y1: 0.20, x2: 0.5, y2: 0.54}, // Spine
+                {type: 'loop', cy: 0.26, rx: 0.095, ry: 0.03, segments: 12}, // Narrower Shoulders
+                {type: 'loop', cy: 0.34, rx: 0.085, ry: 0.035, segments: 12}, // Chest Area
+                {type: 'loop', cy: 0.42, rx: 0.07, ry: 0.025, segments: 12}, // Slim Waist
+                {type: 'loop', cy: 0.54, rx: 0.11, ry: 0.04, segments: 12}, // Wider Pelvis Frame
+                {type: 'line', x1: 0.41, y1: 0.26, x2: 0.32, y2: 0.45}, // Arms Left
+                {type: 'line', x1: 0.32, y1: 0.45, x2: 0.26, y2: 0.63},
+                {type: 'line', x1: 0.59, y1: 0.26, x2: 0.68, y2: 0.45}, // Arms Right
+                {type: 'line', x1: 0.68, y1: 0.45, x2: 0.74, y2: 0.63},
+                {type: 'line', x1: 0.40, y1: 0.54, x2: 0.39, y2: 0.73}, // Left Leg
+                {type: 'line', x1: 0.39, y1: 0.73, x2: 0.38, y2: 0.94},
+                {type: 'line', x1: 0.60, y1: 0.54, x2: 0.61, y2: 0.73}, // Right Leg
+                {type: 'line', x1: 0.61, y1: 0.73, x2: 0.62, y2: 0.94}
+            ];
+
+            function executeStructuralHologramRenderingFrame() {
+                if (document.getElementById('view-whatif-simulator').style.display === 'none') return;
+                
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                rotationalTicksTimelineIndex += 0.012; // Smooth rotation constant
+
+                const midPlaneOriginX = canvas.width * 0.5;
+                const boundingCanvasHeightY = canvas.height;
+                const computedViewportScaleFactor = Math.min(canvas.width, canvas.height) * 0.78 * customStructuralDeformationFactor;
+
+                // Technical diagnostic scale guidelines
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.015)';
+                ctx.lineWidth = 1;
+                for(let y = 0; y < canvas.height; y += 60) {
+                    ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke();
+                }
+
+                ctx.lineWidth = 2.5;
+                ctx.shadowBlur = 14;
+                ctx.shadowColor = simulationRenderingChassisColor;
+
+                const activeComputingBoneDataset = (globalPatientSystemProfileState.assignedGender === "Female") 
+                    ? femaleChassisBoneSegmentsArray 
+                    : maleChassisBoneSegmentsArray;
+
+                activeComputingBoneDataset.forEach(bone => {
+                    ctx.strokeStyle = simulationRenderingChassisColor;
+                    ctx.fillStyle = simulationRenderingChassisColor;
+
+                    if (bone.type === 'line') {
+                        const rX1 = (bone.x1 - 0.5) * Math.cos(rotationalTicksTimelineIndex) * computedViewportScaleFactor + midPlaneOriginX;
+                        const rY1 = bone.y1 * boundingCanvasHeightY;
+                        const rX2 = (bone.x2 - 0.5) * Math.cos(rotationalTicksTimelineIndex) * computedViewportScaleFactor + midPlaneOriginX;
+                        const rY2 = bone.y2 * boundingCanvasHeightY;
+
+                        ctx.beginPath(); ctx.moveTo(rX1, rY1); ctx.lineTo(rX2, rY2); ctx.stroke();
+
+                        ctx.beginPath();
+                        ctx.arc(rX1, rY1, 3.5, 0, Math.PI * 2);
+                        ctx.arc(rX2, rY2, 3.5, 0, Math.PI * 2);
+                        ctx.fill();
+                    } 
+                    else if (bone.type === 'loop') {
+                        ctx.beginPath();
+                        for (let i = 0; i <= bone.segments; i++) {
+                            const orbitalAngle = (i / bone.segments) * Math.PI * 2;
+                            const projectionPlaneX = bone.rx * Math.cos(orbitalAngle);
+                            const projectionPlaneY = bone.ry * Math.sin(orbitalAngle);
+                            
+                            const rotatedX = (projectionPlaneX * Math.cos(rotationalTicksTimelineIndex) - projectionPlaneY * Math.sin(rotationalTicksTimelineIndex)) * computedViewportScaleFactor + midPlaneOriginX;
+                            const rotatedY = (bone.cy + (projectionPlaneX * Math.sin(rotationalTicksTimelineIndex) + projectionPlaneY * Math.cos(rotationalTicksTimelineIndex)) * 0.12) * boundingCanvasHeightY;
+
+                            if (i === 0) ctx.moveTo(rotatedX, rotatedY);
+                            else ctx.lineTo(rotatedX, rotatedY);
+                        }
+                        ctx.stroke();
+                    }
+                });
+
+                ctx.shadowBlur = 0;
+                requestAnimationFrame(executeStructuralHologramRenderingFrame);
+            }
+            
+            runBiomedicalSimulationRecalculation();
+            requestAnimationFrame(executeStructuralHologramRenderingFrame);
+        }
+    </script>
+</body>
+</html>
